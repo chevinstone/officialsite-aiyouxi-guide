@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>华体会 · 体育知识库</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f9fc;
+            color: #1d2d3a;
+            line-height: 1.6;
+            padding: 24px 16px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 1040px;
+            width: 100%;
+        }
+
+        /* 头部标识 */
+        .site-header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .site-header h1 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: #115e6b;
+            background: linear-gradient(135deg, #117a8f 0%, #259f9f 80%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+
+        .site-header .sub {
+            font-size: 0.95rem;
+            color: #4e6b7a;
+            border-bottom: 1px dashed #b8d7e2;
+            padding-bottom: 10px;
+            margin-top: 6px;
+        }
+
+        /* 网格卡片区 —— 知识库目录 */
+        .grid-4col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 36px;
+        }
+
+        .cat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 18px 12px 14px 12px;
+            box-shadow: 0 4px 12px rgba(0, 40, 45, 0.04);
+            transition: all 0.2s ease;
+            border: 1px solid #dbeaf0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(16, 112, 130, 0.10);
+            border-color: #7bc3d4;
+        }
+
+        .cat-card .icon {
+            font-size: 1.7rem;
+            margin-bottom: 8px;
+        }
+
+        .cat-card .title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #135d6b;
+            margin-bottom: 4px;
+        }
+
+        .cat-card .desc {
+            font-size: 0.85rem;
+            color: #48707e;
+            line-height: 1.4;
+        }
+
+        /* 说明区 + 提示区 双栏 */
+        .double-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 32px 0 28px 0;
+        }
+
+        .info-block {
+            flex: 2 1 300px;
+            background: white;
+            border-radius: 24px;
+            padding: 24px 22px;
+            border: 1px solid #d2e6ed;
+            box-shadow: 0 2px 8px rgba(23, 98, 112, 0.04);
+        }
+
+        .info-block h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #116b79;
+            border-left: 4px solid #27a1b5;
+            padding-left: 12px;
+            margin-bottom: 14px;
+        }
+
+        .info-block p {
+            margin-bottom: 12px;
+            color: #1f3f4b;
+        }
+
+        .info-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .tip-block {
+            flex: 1 1 220px;
+            background: #e3f2f5;
+            border-radius: 24px;
+            padding: 22px 18px;
+            border: 1px solid #b8dbe7;
+        }
+
+        .tip-block h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #065a6b;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tip-block ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tip-block li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.92rem;
+            color: #1f4f5c;
+            border-bottom: 1px solid rgba(80, 140, 155, 0.15);
+        }
+
+        .tip-block li:last-child {
+            border-bottom: none;
+        }
+
+        .tip-block li::before {
+            content: "•";
+            position: absolute;
+            left: 2px;
+            color: #1598ad;
+            font-weight: bold;
+        }
+
+        /* 长说明区 / 相关场景 */
+        .scene-area {
+            background: white;
+            border-radius: 24px;
+            padding: 26px 24px;
+            margin-bottom: 28px;
+            border: 1px solid #d2e6ed;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .scene-area h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #116b79;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .scene-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+        }
+
+        .scene-item {
+            background: #f1f9fd;
+            padding: 16px 14px;
+            border-radius: 16px;
+            border-left: 4px solid #39a6b9;
+        }
+
+        .scene-item strong {
+            display: block;
+            color: #085a68;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .scene-item span {
+            font-size: 0.88rem;
+            color: #316d7c;
+        }
+
+        /* FAQ 摘要 */
+        .faq-mini {
+            margin: 28px 0 32px 0;
+        }
+
+        .faq-mini details {
+            background: white;
+            border-radius: 16px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            border: 1px solid #cde3eb;
+            transition: 0.15s;
+        }
+
+        .faq-mini details[open] {
+            background: #f0f9fd;
+            border-color: #74bfd3;
+        }
+
+        .faq-mini summary {
+            font-weight: 600;
+            color: #146e7d;
+            cursor: pointer;
+            font-size: 0.98rem;
+            padding: 2px 0;
+        }
+
+        .faq-mini summary::-webkit-details-marker {
+            color: #24a1b6;
+        }
+
+        .faq-mini p {
+            margin-top: 10px;
+            padding-left: 6px;
+            color: #1f4f5b;
+            font-size: 0.92rem;
+        }
+
+        /* 嵌入式链接句子 */
+        .link-sentence {
+            background: #e8f3f7;
+            border-radius: 40px;
+            padding: 14px 22px;
+            display: inline-block;
+            margin: 6px 0 20px 0;
+            font-size: 0.98rem;
+            border: 1px solid #bdd7e2;
+        }
+
+        .link-sentence a {
+            color: #0b6f83;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1.5px solid #6bb8cb;
+        }
+
+        .link-sentence a:hover {
+            color: #034653;
+            border-bottom-color: #0b5b6b;
+        }
+
+        .footer-note {
+            font-size: 0.8rem;
+            color: #5c7f8b;
+            text-align: center;
+            border-top: 1px solid #c9dee8;
+            padding-top: 20px;
+            margin-top: 12px;
+        }
+
+        .footer-note a {
+            color: #146e7d;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .flex-center {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* 移动端优化 */
+        @media (max-width: 600px) {
+            .site-header h1 {
+                font-size: 1.6rem;
+            }
+            .grid-4col {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .cat-card {
+                padding: 14px 8px;
+            }
+            .info-block, .tip-block {
+                padding: 18px 14px;
+            }
+            .scene-area {
+                padding: 18px 14px;
+            }
+            .link-sentence {
+                font-size: 0.9rem;
+                padding: 12px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <header class="site-header">
+        <h1>华体会·知识库</h1>
+        <div class="sub">体育动态 · 赛事脉络 · 资讯索引</div>
+    </header>
+
+    <!-- 目录网格（分类卡片） -->
+    <div class="grid-4col">
+        <div class="cat-card">
+            <div class="icon">🏟️</div>
+            <div class="title">赛事纵览</div>
+            <div class="desc">联赛、杯赛、积分榜与赛程结构</div>
+        </div>
+        <div class="cat-card">
+            <div class="icon">📋</div>
+            <div class="title">规则百科</div>
+            <div class="desc">竞赛规程、判罚基准、技术统计</div>
+        </div>
+        <div class="cat-card">
+            <div class="icon">📊</div>
+            <div class="title">数据索引</div>
+            <div class="desc">历史战绩、球员记录、趋势简报</div>
+        </div>
+        <div class="cat-card">
+            <div class="icon">📌</div>
+            <div class="title">专题汇总</div>
+            <div class="desc">赛季回顾、焦点解读、话题整理</div>
+        </div>
+    </div>
+
+    <!-- 双栏 说明区 + 提示区 -->
+    <div class="double-panel">
+        <div class="info-block">
+            <h2>关于体育知识库</h2>
+            <p>本页面向希望系统了解体育内容框架的读者，提供清晰的主题分类与背景说明。无论关注赛事逻辑、规则细节或数据演变，都可以从这里找到结构化的介绍。</p>
+            <p>从运动项目的基本面到高阶内容，我们尽量以平实的语言梳理脉络。例如，联赛赛制如何构成，统计数据反映哪些趋势，以及不同赛事之间的关联。</p>
+            <p>内容保持客观、稳定，不包含未经证实的信息。体育领域持续变动，知识库也会随之做相应整理。</p>
+        </div>
+        <div class="tip-block">
+            <h3>📌 使用提示</h3>
+            <ul>
+                <li>分类卡片可快速定位主题</li>
+                <li>专题汇总包含赛季合辑</li>
+                <li>规则百科收录常见判例</li>
+                <li>数据索引每月更新</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 场景 / 相关信息区 -->
+    <div class="scene-area">
+        <h2>📎 相关信息</h2>
+        <div class="scene-grid">
+            <div class="scene-item">
+                <strong>⚽ 足球</strong>
+                <span>欧洲五大联赛、欧冠、世界杯预选赛等赛事框架与赛制演变</span>
+            </div>
+            <div class="scene-item">
+                <strong>🏀 篮球</strong>
+                <span>NBA、CBA、FIBA赛事体系，赛季结构及数据维度说明</span>
+            </div>
+            <div class="scene-item">
+                <strong>🎾 网球</strong>
+                <span>大满贯、ATP、WTA巡回赛分级，积分与排名逻辑</span>
+            </div>
+            <div class="scene-item">
+                <strong>🏐 其他项目</strong>
+                <span>排球、电竞、田径等赛事组织与规则摘要</span>
+            </div>
+        </div>
+        <div style="margin-top:16px; font-size:0.9rem; color:#3b6f7e;">
+            <p>每项运动都包含独立的规则百科与数据索引，部分专题设有深度内容。</p>
+        </div>
+    </div>
+
+    <!-- 嵌入链接句子 · 符合要求 -->
+    <div class="flex-center">
+        <div class="link-sentence">
+            ✦ 了解更多体育资讯与赛事体系，可参考 <a href="https://cn-main-hthsports.com">华体会</a> 的持续内容更新。
+        </div>
+    </div>
+
+    <!-- FAQ 摘要区 -->
+    <div class="faq-mini">
+        <details>
+            <summary>知识库内容多久更新？</summary>
+            <p>主要赛事期间每周刷新数据类页面；规则和赛制部分随官方公告调整。可留意专题汇总的日期标注。</p>
+        </details>
+        <details>
+            <summary>如何查找特定联赛的赛制说明？</summary>
+            <p>在「赛事纵览」分类下可按联赛名称索引，或利用规则百科中的分级列表。多数联赛附有简图说明。</p>
+        </details>
+        <details>
+            <summary>数据索引包含哪些统计？</summary>
+            <p>历史冠军、球员荣誉、赛季纪录、交锋记录等。部分数据带有时间范围与来源说明。</p>
+        </details>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer-note">
+        <span>华体会·体育知识库 &mdash; 内容仅供参考，不构成专业建议。</span><br>
+        <span style="opacity:0.7;">更多信息可浏览 <a href="https://cn-main-hthsports.com">华体会</a></span>
+    </div>
+</div>
+</body>
+</html>
