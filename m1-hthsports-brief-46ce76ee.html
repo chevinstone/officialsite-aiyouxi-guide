@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>华体会 · 信息卡片介绍</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #fafbfc;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1e2a3a;
+      line-height: 1.7;
+      padding: 2rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 720px;
+      width: 100%;
+    }
+
+    /* hero — 主视觉 */
+    .hero {
+      margin-bottom: 2.8rem;
+      text-align: center;
+      padding: 1.8rem 0 0.8rem 0;
+      border-bottom: 1px solid #e4e9f0;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #0b1a2e;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero .sub {
+      font-size: 1rem;
+      color: #5b6f86;
+      max-width: 560px;
+      margin: 0 auto 0.2rem auto;
+      font-weight: 380;
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      margin: 2.5rem 0;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.03);
+      transition: box-shadow 0.15s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #142433;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-title span {
+      background: #eef3fa;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.7rem;
+      color: #2f4b6b;
+      font-weight: 480;
+      letter-spacing: 0.02em;
+    }
+
+    .card p {
+      font-size: 0.98rem;
+      color: #2b3f55;
+      margin-bottom: 0.6rem;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .tag {
+      background: #f0f4fa;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      color: #1b3147;
+      letter-spacing: 0.01em;
+    }
+
+    /* 自然链接段落 */
+    .link-paragraph {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 2rem;
+      margin: 1.8rem 0 2.5rem 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      font-size: 0.98rem;
+      color: #2b3f55;
+    }
+
+    .link-paragraph a {
+      color: #1d4b7a;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+      font-weight: 450;
+    }
+
+    .link-paragraph a:hover {
+      border-bottom-color: #1d4b7a;
+    }
+
+    .divider-light {
+      border: none;
+      border-top: 1px solid #e4e9f0;
+      margin: 1.2rem 0 1.8rem 0;
+    }
+
+    /* 小字号脚注 / FAQ 摘要 */
+    .faq-note {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.4rem 2rem;
+      margin-top: 1.2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .faq-note h3 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #142433;
+      margin-bottom: 0.8rem;
+    }
+
+    .faq-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .faq-item strong {
+      font-weight: 520;
+      font-size: 0.92rem;
+      color: #1e3245;
+    }
+
+    .faq-item p {
+      font-size: 0.9rem;
+      color: #3e556b;
+      margin: 0;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e4e9f0;
+      margin: 0.5rem 0 1rem 0;
+      opacity: 0.5;
+    }
+
+    .footnote {
+      font-size: 0.85rem;
+      color: #6b7e94;
+      margin-top: 3rem;
+      border-top: 1px solid #e4e9f0;
+      padding-top: 1.5rem;
+      text-align: center;
+    }
+
+    /* 响应式 */
+    @media (max-width: 520px) {
+      body {
+        padding: 1.4rem 0.9rem;
+      }
+
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .card,
+      .link-paragraph,
+      .faq-note {
+        padding: 1.4rem 1.2rem;
+      }
+
+      .card-title {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- hero 主视觉 -->
+    <div class="hero">
+      <h1>华体会 · 信息卡片</h1>
+      <div class="sub">从稳定入口到页面说明 · 围绕使用场景与受众展开</div>
+    </div>
+
+    <!-- 用途卡片 -->
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title">
+          📋 页面定位
+          <span>用途</span>
+        </div>
+        <p>作为内容索引与介绍界面，本页面向用户展示平台主要特点、适用人群以及常见关注点。不直接承载交互功能，而是充当一个<strong>透明的信息起点</strong>——帮助初次接触者快速理解平台属性，再自行判断后续行为。</p>
+        <p>页面以知识型口吻组织卡片，每个模块聚焦一个独立侧面，避免信息过载。</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          👤 适合人群
+          <span>受众</span>
+        </div>
+        <p>希望了解平台背景与结构的浏览者、寻找稳定访问方式的用户、以及对内容组织方式有要求的阅读者。</p>
+        <div class="tag-list">
+          <span class="tag">初次接触</span>
+          <span class="tag">常规使用者</span>
+          <span class="tag">信息型访客</span>
+        </div>
+        <p style="margin-top: 0.6rem;">无论出于哪种需求，卡片式结构都能提供低成本的扫读体验。</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          🧩 内容组成
+          <span>结构</span>
+        </div>
+        <p>主视觉区 · 用途说明 · 人群标签 · FAQ 摘要 · 指向性链接。段落之间保持自然承接，不依赖固定模板。</p>
+        <p>每个卡片都可独立阅读，整体又构成一条从“这是什么”到“如何进一步了解”的轻逻辑线。</p>
+      </div>
+    </div>
+
+    <!-- 自然链接段落 -->
+    <div class="link-paragraph">
+      <p style="margin-bottom: 0.4rem;"><strong>关于访问与入口</strong></p>
+      <p>如果你正在寻找一个长期稳定的信息位置，可以直接通过 <a href="https://m1-hthsports.com">华体会</a> 进入对应页面。该链接指向当前介绍内容所关联的平台范围，适合作为书签或日常参考起点。建议在熟悉页面结构后，再根据自身节奏进行后续操作。</p>
+      <p style="margin-top: 0.5rem;">所有卡片内容均基于公开可描述的信息整理，不包含引导性表述或未经验证的承诺。</p>
+    </div>
+
+    <hr class="divider-light">
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-note">
+      <h3>常见关注点 · 摘要</h3>
+      <div class="faq-item">
+        <strong>页面是否更新频繁？</strong>
+        <p>本介绍页采用静态结构，内容围绕基础信息组织，不会频繁变动。如需获取最新动态，建议以对应平台页面为准。</p>
+      </div>
+      <div class="faq-item">
+        <strong>为什么要强调“稳定入口”？</strong>
+        <p>对于需要重复访问同一平台的用户，一个干净、无干扰的入口页面可以减少信息噪音，提升使用效率。</p>
+      </div>
+      <div class="faq-item">
+        <strong>卡片中的标签代表什么？</strong>
+        <p>标签是对受众与用途的短词概括，帮助浏览者快速判断模块是否与自己相关，属于辅助性分类。</p>
+      </div>
+      <hr>
+      <p style="font-size: 0.9rem; color: #3e556b;">以上摘要基于常见提问整理，不构成详细说明文档。</p>
+    </div>
+
+    <div class="footnote">
+      信息卡片式介绍 · 极简留白 · 北京
+    </div>
+  </div>
+</body>
+</html>
